@@ -55,7 +55,6 @@ int main() {
            inet_ntoa(client_addr.sin_addr),
            ntohs(client_addr.sin_port));
 
-    /*
     pid_t pid = fork();
     if (pid == -1) {
       perror("[-] Error creating new process");
@@ -66,9 +65,6 @@ int main() {
       close(client);
       continue;
     }
-
-    close(server);
-     */
 
     if (receive_data_from(client, req) == -1) {
       perror("[-] Error receiving request from client");
