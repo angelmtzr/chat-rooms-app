@@ -1,6 +1,4 @@
 import socket
-from builtins import *
-from getpass import getpass
 
 HOST = "localhost"
 PORT = 5000
@@ -33,7 +31,7 @@ def caesar_decipher(ciphertext, shift):
 
 def auth_service():
     username = input("Username: ")
-    password = getpass("Password: ")
+    password = input("Password: ")
     return f"auth {username} {password}"
 
 

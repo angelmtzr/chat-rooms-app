@@ -4,29 +4,38 @@
 #include <stdio.h>
 #include "../../includes/commons.h"
 #include "../../includes/services/auth.h"
+#include "../../includes/networking/server.h"
 
-void generate_token(char *token) {
+char *generate_token(size_t token_size) {
+  char *token = malloc(token_size * sizeof(char));
   static const char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   srand((unsigned int) time(NULL)); // NOLINT(cert-msc51-cpp)
-  for (int i = 0; i < TOKEN_SIZE; i++) {
+  for (int i = 0; i < token_size; i++) {
     token[i] = charset[rand() % (sizeof(charset) - 1)]; // NOLINT(cert-msc50-cpp)
   }
-  token[TOKEN_SIZE] = '\0';
+  token[token_size] = '\0';
+  return token;
 }
 
-int auth(char *params, char *token) {
-  char *username = strsep(&params, " ");
-  char *password = strsep(&params, " ");
+int auth_service(char *req, char *res) {
+  char *username = strsep(&req, " ");
+  char *password = strsep(&req, " ");
   if (username == NULL || password == NULL) {
     sprintf(error, "The username or password is missing");
+    sprintf(res, "ERROR %s", error);
     return -1;
   }
-  if (strcmp(username, USERNAME) != 0 ||
-      strcmp(password, PASSWORD) != 0) {
+  // TODO: Have this come from database
+  if (strcmp(username, "username") != 0 ||
+      strcmp(password, "password") != 0) {
     sprintf(error, "The username or password is wrong");
+    sprintf(res, "ERROR %s", error);
     return -1;
   }
-  generate_token(token);
+  printf("[+] Authenticated successfully\n");
+  char *token = generate_token(TOKEN_SIZE);
+  sprintf(res, "SUCCESS token=%s", token);
+  free(token);
   return EXIT_SUCCESS;
 }
 

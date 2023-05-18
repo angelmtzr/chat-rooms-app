@@ -1,10 +1,6 @@
-#ifndef CHAT_ROOMS_SERVER_SERVICES_AUTH_H
-#define CHAT_ROOMS_SERVER_SERVICES_AUTH_H
+#ifndef AUTH_H
+#define AUTH_H
 
-#define USERNAME "angelmtzr"
-#define PASSWORD "jaFh38aGd"
-#define TOKEN_SIZE 30
+int auth_service(char *params, char *token);
 
-int auth(char *params, char *token);
-
-#endif //CHAT_ROOMS_SERVER_SERVICES_AUTH_H
+#endif //AUTH_H

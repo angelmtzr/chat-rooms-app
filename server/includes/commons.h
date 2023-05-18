@@ -1,8 +1,10 @@
-#ifndef CHAT_ROOMS_SERVER_COMMONS_H
-#define CHAT_ROOMS_SERVER_COMMONS_H
+#ifndef COMMONS_H
+#define COMMONS_H
+
+#include <sys/types.h>
 
 #define MAX_SIZE 255
 
 char error[MAX_SIZE];
 
-#endif //CHAT_ROOMS_SERVER_COMMONS_H
+#endif //COMMONS_H
