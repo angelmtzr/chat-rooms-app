@@ -1,7 +1,7 @@
 import socket
 
 HOST = "localhost"
-PORT = 5000
+PORT = 5004
 KEY = 14
 
 

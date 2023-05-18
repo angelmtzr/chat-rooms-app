@@ -2,9 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "../../includes/commons.h"
-#include "../../includes/services/auth.h"
-#include "../../includes/networking/server.h"
+
+#ifndef AUTH_H
+#define AUTH_H
+
+#include "commons.h"
+#include "server.h"
+
+#define TOKEN_SIZE 30
 
 char *generate_token(size_t token_size) {
   char *token = malloc(token_size * sizeof(char));
@@ -39,3 +44,4 @@ int auth_service(char *req, char *res) {
   return EXIT_SUCCESS;
 }
 
+#endif //AUTH_H

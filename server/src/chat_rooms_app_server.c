@@ -1,7 +1,7 @@
 #include <unistd.h>
-#include "../includes/networking/server.h"
+#include "includes/server.h"
 
-#define PORT 5000
+#define PORT 5004
 
 int main() {
   Socket server = server_setup(PORT);

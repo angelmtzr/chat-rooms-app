@@ -7,8 +7,12 @@
 
 typedef pid_t ProcessId;
 
-int is_main_process(ProcessId id);
+int is_main_process(ProcessId id) {
+  return id > 0;
+}
 
-ProcessId create_new_process();
+ProcessId create_new_process() {
+  return fork();
+}
 
 #endif //PROCESS_H
