@@ -24,7 +24,7 @@ char *generate_token(size_t token_size) {
   return token;
 }
 
-int read_database(char *req, char *res, FILE *auth_file){
+int read_database(char *req, char *res){
 
   char *reqUsername = strsep(&req, " ");
   char *reqPassword = strsep(&req, " ");
@@ -35,6 +35,8 @@ int read_database(char *req, char *res, FILE *auth_file){
     return -1;
   }
 
+  char *filename = "auth.txt";
+  FILE *auth_file = fopen(filename, "r");
   if (auth_file == NULL) {
     sprintf(error, "Could not open file");
     sprintf(res, "ERROR %s", error);
@@ -58,15 +60,17 @@ int read_database(char *req, char *res, FILE *auth_file){
     }
     if(strcmp(username, reqUsername) == 0 &&
        strcmp(password, reqPassword) == 0) {
+        fclose(auth_file);
          return EXIT_SUCCESS; 
     }
   }
   sprintf(error, "The username or password is wrong");
   sprintf(res, "ERROR %s", error);
+  fclose(auth_file);
   return -1;
 }
 
-int write_database(char *req, char *res, FILE *auth_file){
+int write_database(char *req, char *res){
 
   if (req == NULL) {
     sprintf(error, "The username or password is missing");
@@ -74,19 +78,23 @@ int write_database(char *req, char *res, FILE *auth_file){
     return -1;
   }
 
+  char *filename = "auth.txt";
+  FILE *auth_file = fopen(filename, "a");
   if (auth_file == NULL) {
     sprintf(error, "Could not open file");
     sprintf(res, "ERROR %s", error);
+    fclose(auth_file);
     return -1;
   }
 
   fprintf(auth_file, "%s\n", req);
+  fclose(auth_file);
   return EXIT_SUCCESS;
 }
 
-int auth_service(char *req, char *res, FILE *auth_file) {
+int auth_service(char *req, char *res) {
 
-  if (read_database(req, res, auth_file) == -1) {
+  if (read_database(req, res) == -1) {
     return -1;
   }
   printf("[+] Authenticated successfully\n");
@@ -96,8 +104,8 @@ int auth_service(char *req, char *res, FILE *auth_file) {
   return EXIT_SUCCESS;
 }
 
-int new_user_service(char *req, char *res, FILE *auth_file){
-  if (write_database(req, res, auth_file) == -1){
+int new_user_service(char *req, char *res){
+  if (write_database(req, res) == -1){
     return -1;
   }
   printf("[+] New user created successfully\n");

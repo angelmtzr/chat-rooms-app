@@ -188,7 +188,6 @@ class LobbyPage(ctk.CTkFrame):
         self.controller = controller
 
         self.grid(row=4, column=5, rowspan=4, sticky="nsew")
-
         ctk.CTkLabel(self, text="LOBBY", font=("Montserrat", 28, "bold")).pack(pady=40)
 
 

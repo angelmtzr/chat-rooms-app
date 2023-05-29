@@ -82,17 +82,17 @@ Socket server_accept(Socket server) {
   return client;
 }
 
-int process_request(char *req, char *res, FILE *read_file, FILE *write_file) {
+int process_request(char *req, char *res) {
   char *service = strsep(&req, " ");
   printf("[+] Service requested: %s\n", service);
 
   if (strcmp(service, "auth") == 0) {
-    if (auth_service(req, res, read_file) == -1) {
+    if (auth_service(req, res) == -1) {
       return -1;
     }
   }
   else if(strcmp(service, "new_user") == 0){
-    if(new_user_service(req, res, write_file) == -1){
+    if(new_user_service(req, res) == -1){
       return -1;
     }
   }
@@ -121,7 +121,7 @@ int process_request(char *req, char *res, FILE *read_file, FILE *write_file) {
  * @param[in] server The server.
  * @param[in] client The client connection.
  */
-void handle_connection(Socket server, Socket client, FILE *read_file, FILE *write_file) {
+void handle_connection(Socket server, Socket client) {
   ProcessId process_id = create_new_process();
 
   if (is_main_process(process_id)) {
@@ -150,7 +150,7 @@ void handle_connection(Socket server, Socket client, FILE *read_file, FILE *writ
 
   // Processes accordingly the client request
   char decrypted_response[BUFFER_SIZE];
-  if (process_request(decrypted_request, decrypted_response, read_file, write_file) == -1) {
+  if (process_request(decrypted_request, decrypted_response) == -1) {
     fprintf(stderr, "[-] Error processing client request: %s\n", error);
   }
   free(decrypted_request);
