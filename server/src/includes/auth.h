@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 
+
 #ifndef AUTH_H
 #define AUTH_H
 
@@ -10,6 +11,7 @@
 #include "server.h"
 
 #define TOKEN_SIZE 30
+#define BUFFER_SIZE 1024
 
 char *generate_token(size_t token_size) {
   char *token = malloc(token_size * sizeof(char));
@@ -22,25 +24,84 @@ char *generate_token(size_t token_size) {
   return token;
 }
 
-int auth_service(char *req, char *res) {
-  char *username = strsep(&req, " ");
-  char *password = strsep(&req, " ");
-  if (username == NULL || password == NULL) {
+int read_database(char *req, char *res, FILE *auth_file){
+
+  char *reqUsername = strsep(&req, " ");
+  char *reqPassword = strsep(&req, " ");
+
+  if (reqUsername == NULL || reqPassword == NULL) {
     sprintf(error, "The username or password is missing");
     sprintf(res, "ERROR %s", error);
     return -1;
   }
-  // TODO: Have this come from database
-  if (strcmp(username, "username") != 0 ||
-      strcmp(password, "password") != 0) {
-    sprintf(error, "The username or password is wrong");
+
+  if (auth_file == NULL) {
+    sprintf(error, "Could not open file");
     sprintf(res, "ERROR %s", error);
+    return -1;
+  }
+
+  char line[BUFFER_SIZE];
+  char username[BUFFER_SIZE];
+  char password[BUFFER_SIZE];
+
+  while (fgets(line, sizeof line, auth_file) != NULL){
+    line[strcspn(line, "\r\n")] = 0;
+    char *ptr = strtok(line, " ");
+    if (ptr != NULL) {
+      strncpy(username, ptr, BUFFER_SIZE);
+      ptr = strtok(NULL, " ");
+
+      if (ptr != NULL) {
+        strncpy(password, ptr, BUFFER_SIZE);
+      }
+    }
+    if(strcmp(username, reqUsername) == 0 &&
+       strcmp(password, reqPassword) == 0) {
+         return EXIT_SUCCESS; 
+    }
+  }
+  sprintf(error, "The username or password is wrong");
+  sprintf(res, "ERROR %s", error);
+  return -1;
+}
+
+int write_database(char *req, char *res, FILE *auth_file){
+
+  if (req == NULL) {
+    sprintf(error, "The username or password is missing");
+    sprintf(res, "ERROR %s", error);
+    return -1;
+  }
+
+  if (auth_file == NULL) {
+    sprintf(error, "Could not open file");
+    sprintf(res, "ERROR %s", error);
+    return -1;
+  }
+
+  fprintf(auth_file, "%s\n", req);
+  return EXIT_SUCCESS;
+}
+
+int auth_service(char *req, char *res, FILE *auth_file) {
+
+  if (read_database(req, res, auth_file) == -1) {
     return -1;
   }
   printf("[+] Authenticated successfully\n");
   char *token = generate_token(TOKEN_SIZE);
   sprintf(res, "SUCCESS token=%s", token);
   free(token);
+  return EXIT_SUCCESS;
+}
+
+int new_user_service(char *req, char *res, FILE *auth_file){
+  if (write_database(req, res, auth_file) == -1){
+    return -1;
+  }
+  printf("[+] New user created successfully\n");
+  sprintf(res, "SUCCESS User created successfully");
   return EXIT_SUCCESS;
 }
 

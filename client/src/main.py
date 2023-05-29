@@ -76,13 +76,32 @@ class ChatRoomsApp(ctk.CTk):
             frame = self.frames[page_name]
             frame.tkraise()
         elif auth_code == "ERROR":
+            self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.s.connect((HOST, PORT))
             self.open_toplevel_login()
 
     def signup(self, page_name, username, password):
         if len(username) > 7 and len(password) > 7:
-            self.open_toplevel_success()
-            frame = self.frames[page_name]
-            frame.tkraise()
+            req = f"new_user {username} {password}"
+            print(f"[+] Client request (decrypted): {req}")
+            req = caesar_cipher(req, KEY)
+            self.s.send(req.encode())
+            print(f"[+] Request sent to server (encrypted): {req}")
+            res = self.s.recv(1024).decode()
+            print(f"[+] Response from server (encrypted): {res}")
+            res = caesar_decipher(res, KEY)
+            print(f"[+] Server response (decrypted): {res}")
+            auth_code = res.split(" ")[0]
+            if auth_code == "SUCCESS":
+                self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                self.s.connect((HOST, PORT))
+                self.open_toplevel_success()
+                frame = self.frames[page_name]
+                frame.tkraise()
+            elif auth_code == "ERROR":
+                self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                self.s.connect((HOST, PORT))
+                self.open_toplevel_signup()
         else:
             self.open_toplevel_signup()
 
