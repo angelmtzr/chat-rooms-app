@@ -314,7 +314,30 @@ class Lobby(ctk.CTk):
                                                                                    ))
         self.create_group_button.grid(row=0, column=7, columnspan=3)
         self.frame = ctk.CTkFrame(self, width=100, corner_radius=0)
-        self.frame.grid(row=1, column=0, rowspan=10, columnspan=11, sticky="nsew")
+        self.frame.grid(row=1, column=0, rowspan=10, columnspan=11, sticky="nsew", pady=0)
+        self.frame.grid_columnconfigure((0, 1, 2), weight=1)
+        self.frame.grid_rowconfigure((0, 1, 2), weight=1)
+        self.my_groups = ctk.CTkLabel(self.frame, text="My Groups", font=("Montserrat", 18, "bold")).grid(row=0,
+                                                                                                          column=0)
+        self.all_groups = ctk.CTkLabel(self.frame, text="All Groups", font=("Montserrat", 18, "bold")).grid(row=0,
+                                                                                                            column=1)
+        self.requests = ctk.CTkLabel(self.frame, text="Requests", font=("Montserrat", 18, "bold")).grid(row=0,
+                                                                                                        column=2)
+        self.scrollable_frame1 = ctk.CTkScrollableFrame(self.frame, height=350, width=150)
+        self.scrollable_frame1.grid(row=1, column=0, rowspan=2)
+        self.scrollable_frame1.grid_columnconfigure(0, weight=1)
+        self.scrollable_frame2 = ctk.CTkScrollableFrame(self.frame, height=350, width=150)
+        self.scrollable_frame2.grid(row=1, column=1, rowspan=2)
+        self.scrollable_frame2.grid_columnconfigure(0, weight=1)
+        self.scrollable_frame3 = ctk.CTkScrollableFrame(self.frame, height=350, width=150)
+        self.scrollable_frame3.grid(row=1, column=2, rowspan=2)
+        self.scrollable_frame3.grid_columnconfigure(0, weight=1)
+
+        # self.scrollable_frame_switches = []
+        # for i in range(10):
+        #     switch = ctk.CTkSwitch(master=self.scrollable_frame, text=f"CTkSwitch {i}")
+        #     switch.grid(row=i, column=0, padx=10, pady=(0, 20))
+        #     self.scrollable_frame_switches.append(switch)
 
     def create_group(self, username, group_name):
         server_available = reachable_server()
