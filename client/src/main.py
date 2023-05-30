@@ -5,9 +5,9 @@ from PIL import Image
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("dark-blue")
 
-USER = "edgarvlz"
-PASSWORD = "12345"
 KEY = 14
+
+current_user = ""
 
 
 def server_connection(host: str, port: int) -> bool:
@@ -40,8 +40,8 @@ class ChatRoomsApp(ctk.CTk):
     def __init__(self, s, server_address):
         ctk.CTk.__init__(self)
 
-        self.geometry("1100x600")
-        self.title("PimenTalk")
+        self.geometry("650x600")
+        self.title("PimenTalk - Login")
         self.iconbitmap("bitmap.ico")
         self.toplevel_window = None
         self.s = s
@@ -53,12 +53,12 @@ class ChatRoomsApp(ctk.CTk):
         container.grid_columnconfigure((0, 10), weight=1)
 
         self.frames = {}
-        for F in (SignupPage, LoginPage, LobbyPage):
+        for F in (SignupPage, LoginPage):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
 
-        self.show_frame("LobbyPage")
+        self.show_frame("SignupPage")
 
     def show_frame(self, page_name):
         frame = self.frames[page_name]
@@ -85,7 +85,7 @@ class ChatRoomsApp(ctk.CTk):
         else:
             self.toplevel_window.focus()
 
-    def login(self, page_name, username, password):
+    def login(self, username, password):
         req = f"auth {username} {password}"
         print(f"[+] Client request (decrypted): {req}")
         req = caesar_cipher(req, KEY)
@@ -97,8 +97,9 @@ class ChatRoomsApp(ctk.CTk):
         print(f"[+] Server response (decrypted): {res}")
         auth_code = res.split(" ")[0]
         if auth_code == "SUCCESS":
-            frame = self.frames[page_name]
-            frame.tkraise()
+            global current_user
+            current_user = f"{username}"
+            self.destroy()
         elif auth_code == "ERROR":
             self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.s.connect((self.address[0], self.address[1]))
@@ -120,8 +121,7 @@ class ChatRoomsApp(ctk.CTk):
                 self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 self.s.connect((self.address[0], self.address[1]))
                 self.open_toplevel_success()
-                frame = self.frames[page_name]
-                frame.tkraise()
+                self.show_frame(page_name)
             elif auth_code == "ERROR":
                 self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 self.s.connect((self.address[0], self.address[1]))
@@ -192,8 +192,7 @@ class LoginPage(ctk.CTkFrame):
         login_button_l = ctk.CTkButton(self, width=380, height=50, text="Login",
                                        font=("Montserrat", 18, "bold"), text_color="Black",
                                        fg_color="#fca521", hover_color="#e38c09",
-                                       command=lambda: controller.login("LobbyPage",
-                                                                        login_username_entry.get(),
+                                       command=lambda: controller.login(login_username_entry.get(),
                                                                         login_password_entry.get()))
         login_button_l.pack(pady=10, padx=40)
 
@@ -228,7 +227,7 @@ class ToplevelWindowLogin(ctk.CTkToplevel):
                                    dark_image=Image.open("error_icon.png"),
                                    size=(30, 30))
         ctk.CTkLabel(self, image=error_image, text="").grid(column=0, row=0, pady=10, padx=5)
-        ctk.CTkLabel(self, text="Wrong password or username.", font=("Montserrat", 15, "bold")).grid(column=1, row=0,
+        ctk.CTkLabel(self, text="Wrong username or password.", font=("Montserrat", 15, "bold")).grid(column=1, row=0,
                                                                                                      columnspan=2,
                                                                                                      pady=10)
         ctk.CTkButton(self, width=150, height=40, text="Accept",
@@ -278,9 +277,95 @@ class ToplevelWindowSuccess(ctk.CTkToplevel):
                                    dark_image=Image.open("success_icon.png"),
                                    size=(30, 30))
         ctk.CTkLabel(self, image=error_image, text="").grid(column=0, row=0, pady=10, padx=5)
-        ctk.CTkLabel(self, text="User created successfully!", font=("Montserrat", 15, "bold")).grid(column=1, row=0,
-                                                                                                    columnspan=2,
-                                                                                                    pady=10)
+        ctk.CTkLabel(self, text="Created successfully!", font=("Montserrat", 15, "bold")).grid(column=1, row=0,
+                                                                                               columnspan=2,
+                                                                                               pady=10)
+        ctk.CTkButton(self, width=150, height=40, text="Accept",
+                      font=("Montserrat", 18, "bold"), text_color="White",
+                      fg_color="#4a4743",
+                      hover_color="#595550", command=self.destroy).grid(column=1, row=1)
+
+
+class Lobby(ctk.CTk):
+    def __init__(self, s, server_address, username):
+        ctk.CTk.__init__(self)
+
+        self.geometry("750x600")
+        self.title("PimenTalk - Lobby")
+        self.iconbitmap("bitmap.ico")
+        self.toplevel_window = None
+        self.s = s
+        self.address = server_address
+        self.grid_rowconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), weight=1)
+        self.grid_columnconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), weight=1)
+
+        user_greeting = f"Hello {username}, welcome to PimenTalk!"
+        self.greeting = ctk.CTkLabel(self, text=user_greeting, font=("Montserrat", 18, "bold")).grid(row=0,
+                                                                                                     column=0,
+                                                                                                     columnspan=5)
+        self.group_name_entry = ctk.CTkEntry(self, width=140, height=40, placeholder_text="Group name",
+                                             placeholder_text_color=("Grey", "Grey"))
+        self.group_name_entry.grid(row=0, column=6)
+        self.create_group_button = ctk.CTkButton(self, width=140, height=40, text="Create Group",
+                                                 font=("Montserrat", 15, "bold"), text_color="black",
+                                                 fg_color="#fca521", hover_color="#e38c09",
+                                                 command=lambda: self.create_group(username, self.group_name_entry.get()
+                                                                                   ))
+        self.create_group_button.grid(row=0, column=7, columnspan=3)
+        self.frame = ctk.CTkFrame(self, width=100, corner_radius=0)
+        self.frame.grid(row=1, column=0, rowspan=10, columnspan=11, sticky="nsew")
+
+    def create_group(self, username, group_name):
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s.connect((self.address[0], self.address[1]))
+        req = f"new_group {username} {group_name}"
+        print(f"[+] Client request (decrypted): {req}")
+        req = caesar_cipher(req, KEY)
+        self.s.send(req.encode())
+        print(f"[+] Request sent to server (encrypted): {req}")
+        res = self.s.recv(1024).decode()
+        print(f"[+] Response from server (encrypted): {res}")
+        res = caesar_decipher(res, KEY)
+        print(f"[+] Server response (decrypted): {res}")
+        auth_code = res.split(" ")[0]
+        if auth_code == "SUCCESS":
+            self.open_toplevel_success()
+        elif auth_code == "ERROR":
+            self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.s.connect((self.address[0], self.address[1]))
+            self.open_toplevel_group()
+
+    def open_toplevel_group(self):
+        if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
+            self.toplevel_window = ToplevelWindowGroup()  # create window if its None or destroyed
+            self.toplevel_window.focus()
+        else:
+            self.toplevel_window.focus()
+
+    def open_toplevel_success(self):
+        if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
+            self.toplevel_window = ToplevelWindowSuccess()  # create window if its None or destroyed
+            self.toplevel_window.focus()
+        else:
+            self.toplevel_window.focus()
+
+
+class ToplevelWindowGroup(ctk.CTkToplevel):
+    def __init__(self):
+        ctk.CTkToplevel.__init__(self)
+        self.geometry("350x150")
+        self.title("Notification")
+        self.after(250, lambda: self.iconbitmap("error_bitmap.ico"))
+        self.grid_rowconfigure((0, 2), weight=1)
+        self.grid_columnconfigure((0, 3), weight=1)
+
+        error_image = ctk.CTkImage(light_image=Image.open("error_icon.png"),
+                                   dark_image=Image.open("error_icon.png"),
+                                   size=(30, 30))
+        ctk.CTkLabel(self, image=error_image, text="").grid(column=0, row=0, pady=10, padx=5)
+        ctk.CTkLabel(self, text="Could not create group.", font=("Montserrat", 15, "bold")).grid(column=1, row=0,
+                                                                                                 columnspan=2,
+                                                                                                 pady=10)
         ctk.CTkButton(self, width=150, height=40, text="Accept",
                       font=("Montserrat", 18, "bold"), text_color="White",
                       fg_color="#4a4743",
@@ -318,6 +403,8 @@ def main():
         print(f"[+] Connected to server on {server_available[0]}:{server_available[1]}")
         CRA = ChatRoomsApp(s, server_available)
         CRA.mainloop()
+        CRL = Lobby(s, server_available, current_user)
+        CRL.mainloop()
 
 
 if __name__ == '__main__':

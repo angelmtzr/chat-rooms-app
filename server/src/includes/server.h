@@ -13,6 +13,7 @@
 #include "encrypt.h"
 #include "commons.h"
 #include "process.h"
+#include "new_group.h"
 
 #define BUFFER_SIZE 1024
 #define CIPHER_KEY 14
@@ -99,11 +100,11 @@ int process_request(char *req, char *res) {
   else if(strcmp(service, "check_server") == 0){
     sprintf(res, "SUCCESS Server available");
   }
-    /*else if (strcmp(service, "new_group") == 0) {
-      if (new_group_service(req, res) == -1) {
-        return -1;
-      }
-    }*/
+  else if (strcmp(service, "new_group") == 0) {
+    if (new_group_service(req, res) == -1) {
+      return -1;
+    }
+  }
   else {
     sprintf(error, "Requested an invalid service");
     sprintf(res, "ERROR %s", error);

@@ -3,8 +3,6 @@
 
 #define PORT 5001
 
-FILE *open_file_readmode();
-FILE *open_file_appendmode();
 
 int main() {
   Socket server = server_setup(PORT);
