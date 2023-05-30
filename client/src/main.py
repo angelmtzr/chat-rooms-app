@@ -37,7 +37,7 @@ def reachable_server():
 
 class ChatRoomsApp(ctk.CTk):
 
-    def __init__(self, s, server_address):
+    def __init__(self, s):
         ctk.CTk.__init__(self)
 
         self.geometry("650x600")
@@ -45,7 +45,6 @@ class ChatRoomsApp(ctk.CTk):
         self.iconbitmap("bitmap.ico")
         self.toplevel_window = None
         self.s = s
-        self.address = server_address
 
         container = ctk.CTkFrame(self)
         container.pack(fill="both", expand=True)
@@ -101,8 +100,9 @@ class ChatRoomsApp(ctk.CTk):
             current_user = f"{username}"
             self.destroy()
         elif auth_code == "ERROR":
+            server_available = reachable_server()
             self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.s.connect((self.address[0], self.address[1]))
+            self.s.connect((server_available[0], server_available[1]))
             self.open_toplevel_login()
 
     def signup(self, page_name, username, password):
@@ -118,13 +118,15 @@ class ChatRoomsApp(ctk.CTk):
             print(f"[+] Server response (decrypted): {res}")
             auth_code = res.split(" ")[0]
             if auth_code == "SUCCESS":
+                server_available = reachable_server()
                 self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                self.s.connect((self.address[0], self.address[1]))
+                self.s.connect((server_available[0], server_available[1]))
                 self.open_toplevel_success()
                 self.show_frame(page_name)
             elif auth_code == "ERROR":
+                server_available = reachable_server()
                 self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                self.s.connect((self.address[0], self.address[1]))
+                self.s.connect((server_available[0], server_available[1]))
                 self.open_toplevel_signup()
         else:
             self.open_toplevel_signup()
@@ -287,7 +289,7 @@ class ToplevelWindowSuccess(ctk.CTkToplevel):
 
 
 class Lobby(ctk.CTk):
-    def __init__(self, s, server_address, username):
+    def __init__(self, s, username):
         ctk.CTk.__init__(self)
 
         self.geometry("750x600")
@@ -295,7 +297,6 @@ class Lobby(ctk.CTk):
         self.iconbitmap("bitmap.ico")
         self.toplevel_window = None
         self.s = s
-        self.address = server_address
         self.grid_rowconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), weight=1)
         self.grid_columnconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), weight=1)
 
@@ -316,8 +317,9 @@ class Lobby(ctk.CTk):
         self.frame.grid(row=1, column=0, rowspan=10, columnspan=11, sticky="nsew")
 
     def create_group(self, username, group_name):
+        server_available = reachable_server()
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.s.connect((self.address[0], self.address[1]))
+        self.s.connect((server_available[0], server_available[1]))
         req = f"new_group {username} {group_name}"
         print(f"[+] Client request (decrypted): {req}")
         req = caesar_cipher(req, KEY)
@@ -331,8 +333,9 @@ class Lobby(ctk.CTk):
         if auth_code == "SUCCESS":
             self.open_toplevel_success()
         elif auth_code == "ERROR":
+            server_available = reachable_server()
             self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.s.connect((self.address[0], self.address[1]))
+            self.s.connect((server_available[0], server_available[1]))
             self.open_toplevel_group()
 
     def open_toplevel_group(self):
@@ -401,9 +404,9 @@ def main():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((server_available[0], server_available[1]))
         print(f"[+] Connected to server on {server_available[0]}:{server_available[1]}")
-        CRA = ChatRoomsApp(s, server_available)
+        CRA = ChatRoomsApp(s)
         CRA.mainloop()
-        CRL = Lobby(s, server_available, current_user)
+        CRL = Lobby(s, current_user)
         CRL.mainloop()
 
 
