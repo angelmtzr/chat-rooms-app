@@ -7,3 +7,4 @@ edgar1234 password1
 ivanandrade rojas123
 benito123 elmashermoso
 betonto2 elmasmaryjane
+newuser123 newpassword
