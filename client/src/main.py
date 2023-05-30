@@ -7,14 +7,38 @@ ctk.set_default_color_theme("dark-blue")
 
 USER = "edgarvlz"
 PASSWORD = "12345"
-HOST = "localhost"
-PORT = 5004
 KEY = 14
+
+
+def server_connection(host: str, port: int) -> bool:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(1)
+    sock.connect_ex((host, port))
+    check_server_str = caesar_cipher("check_server", KEY)
+    sock.send(check_server_str.encode())
+    reply = sock.recv(1024).decode()
+
+    if reply == "":
+        return False
+    else:
+        return True
+
+
+def reachable_server():
+    servers = [("127.0.0.1", 5004),
+               ("127.0.0.1", 5001)]
+    no_Server = ("0.0.0.0", 0)
+    for i in range(len(servers)):
+        r = server_connection(servers[i][0], servers[i][1])
+        print(r)
+        if r:
+            return servers[i]
+    return no_Server
 
 
 class ChatRoomsApp(ctk.CTk):
 
-    def __init__(self, s):
+    def __init__(self, s, server_address):
         ctk.CTk.__init__(self)
 
         self.geometry("1100x600")
@@ -22,6 +46,7 @@ class ChatRoomsApp(ctk.CTk):
         self.iconbitmap("bitmap.ico")
         self.toplevel_window = None
         self.s = s
+        self.address = server_address
 
         container = ctk.CTkFrame(self)
         container.pack(fill="both", expand=True)
@@ -77,7 +102,7 @@ class ChatRoomsApp(ctk.CTk):
             frame.tkraise()
         elif auth_code == "ERROR":
             self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.s.connect((HOST, PORT))
+            self.s.connect((self.address[0], self.address[1]))
             self.open_toplevel_login()
 
     def signup(self, page_name, username, password):
@@ -94,13 +119,13 @@ class ChatRoomsApp(ctk.CTk):
             auth_code = res.split(" ")[0]
             if auth_code == "SUCCESS":
                 self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                self.s.connect((HOST, PORT))
+                self.s.connect((self.address[0], self.address[1]))
                 self.open_toplevel_success()
                 frame = self.frames[page_name]
                 frame.tkraise()
             elif auth_code == "ERROR":
                 self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                self.s.connect((HOST, PORT))
+                self.s.connect((self.address[0], self.address[1]))
                 self.open_toplevel_signup()
         else:
             self.open_toplevel_signup()
@@ -288,10 +313,12 @@ def caesar_decipher(ciphertext, shift):
 
 
 def main():
+    server_available = reachable_server()
+    print(server_available)
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((HOST, PORT))
-        print(f"[+] Connected to server on {HOST}:{PORT}")
-        CRA = ChatRoomsApp(s)
+        s.connect((server_available[0], server_available[1]))
+        print(f"[+] Connected to server on {server_available[0]}:{server_available[1]}")
+        CRA = ChatRoomsApp(s, server_available)
         CRA.mainloop()
 
 

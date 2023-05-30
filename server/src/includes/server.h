@@ -96,6 +96,9 @@ int process_request(char *req, char *res) {
       return -1;
     }
   }
+  else if(strcmp(service, "check_server") == 0){
+    sprintf(res, "SUCCESS Server available");
+  }
     /*else if (strcmp(service, "new_group") == 0) {
       if (new_group_service(req, res) == -1) {
         return -1;
@@ -158,7 +161,7 @@ void handle_connection(Socket server, Socket client) {
   // Encrypt server response
   printf("[+] Server response (decrypted): %s\n", decrypted_response);
   char *encrypted_response = caesar_cipher(decrypted_response, CIPHER_KEY);
-  printf("[+] Server sent (encrypted): %s\n", decrypted_response);
+  printf("[+] Server sent (encrypted): %s\n", encrypted_response);
 
   // Send response to client
   if (send(client, encrypted_response, strlen(encrypted_response), 0) == -1) {
