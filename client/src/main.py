@@ -30,7 +30,6 @@ def reachable_server():
     no_Server = ("0.0.0.0", 0)
     for i in range(len(servers)):
         r = server_connection(servers[i][0], servers[i][1])
-        print(r)
         if r:
             return servers[i]
     return no_Server
@@ -59,7 +58,7 @@ class ChatRoomsApp(ctk.CTk):
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
 
-        self.show_frame("SignupPage")
+        self.show_frame("LobbyPage")
 
     def show_frame(self, page_name):
         frame = self.frames[page_name]
@@ -314,7 +313,6 @@ def caesar_decipher(ciphertext, shift):
 
 def main():
     server_available = reachable_server()
-    print(server_available)
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((server_available[0], server_available[1]))
         print(f"[+] Connected to server on {server_available[0]}:{server_available[1]}")
