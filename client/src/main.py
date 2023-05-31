@@ -41,11 +41,7 @@ class ChatRoomsApp(ctk.CTk):
     def __init__(self):
         ctk.CTk.__init__(self)
 
-        server_available = reachable_server()
-        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.s.connect((server_available[0], server_available[1]))
-        print(f"[+] Connected to server on {server_available[0]}:{server_available[1]}")
-
+        self.s = ""
         self.geometry("650x600")
         self.title("PimenTalk - Login")
         self.iconbitmap("bitmap.ico")
@@ -90,6 +86,10 @@ class ChatRoomsApp(ctk.CTk):
             self.toplevel_window.focus()
 
     def login(self, username, password):
+        server_available = reachable_server()
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s.connect((server_available[0], server_available[1]))
+        print(f"[+] Connected to server on {server_available[0]}:{server_available[1]}")
         req = f"auth {username} {password}"
         print(f"[+] Client request (decrypted): {req}")
         req = caesar_cipher(req, KEY)
@@ -107,12 +107,13 @@ class ChatRoomsApp(ctk.CTk):
             current_user = f"{username}"
             self.destroy()
         elif auth_code == "ERROR":
-            server_available = reachable_server()
-            self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.s.connect((server_available[0], server_available[1]))
             self.open_toplevel_login()
 
     def signup(self, page_name, username, password):
+        server_available = reachable_server()
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s.connect((server_available[0], server_available[1]))
+        print(f"[+] Connected to server on {server_available[0]}:{server_available[1]}")
         if len(username) > 7 and len(password) > 7:
             req = f"new_user {username} {password}"
             print(f"[+] Client request (decrypted): {req}")
@@ -125,15 +126,9 @@ class ChatRoomsApp(ctk.CTk):
             print(f"[+] Server response (decrypted): {res}")
             auth_code = res.split(" ")[0]
             if auth_code == "SUCCESS":
-                server_available = reachable_server()
-                self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                self.s.connect((server_available[0], server_available[1]))
                 self.open_toplevel_success()
                 self.show_frame(page_name)
             elif auth_code == "ERROR":
-                server_available = reachable_server()
-                self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                self.s.connect((server_available[0], server_available[1]))
                 self.open_toplevel_signup()
         else:
             self.open_toplevel_signup()
@@ -299,11 +294,7 @@ class Lobby(ctk.CTk):
     def __init__(self, username):
         ctk.CTk.__init__(self)
 
-        server_available = reachable_server()
-        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.s.connect((server_available[0], server_available[1]))
-        print(f"[+] Connected to server on {server_available[0]}:{server_available[1]}")
-
+        self.s = ""
         self.geometry("750x600")
         self.title("PimenTalk - Lobby")
         self.iconbitmap("bitmap.ico")
@@ -350,6 +341,10 @@ class Lobby(ctk.CTk):
         self.get_other_groups(username)
 
     def create_group(self, username, group_name):
+        server_available = reachable_server()
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s.connect((server_available[0], server_available[1]))
+        print(f"[+] Connected to server on {server_available[0]}:{server_available[1]}")
         req = f"new_group {group_name} {username}"
         print(f"[+] Client request (decrypted): {req}")
         req = caesar_cipher(req, KEY)
@@ -361,9 +356,6 @@ class Lobby(ctk.CTk):
         print(f"[+] Server response (decrypted): {res}")
         auth_code = res.split(" ")[0]
         if auth_code == "SUCCESS":
-            server_available = reachable_server()
-            self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.s.connect((server_available[0], server_available[1]))
             self.open_toplevel_success()
             self.scrollable_frame1_buttons.append(group_name)
             for i, button in enumerate(self.scrollable_frame1_buttons):
@@ -372,12 +364,13 @@ class Lobby(ctk.CTk):
                 new_button.grid(row=i, column=0, padx=10, pady=(0, 20))
 
         elif auth_code == "ERROR":
-            server_available = reachable_server()
-            self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.s.connect((server_available[0], server_available[1]))
             self.open_toplevel_group()
 
     def get_groups(self, username):
+        server_available = reachable_server()
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s.connect((server_available[0], server_available[1]))
+        print(f"[+] Connected to server on {server_available[0]}:{server_available[1]}")
         req = f"get_user_groups {username}"
         print(f"[+] Client request (decrypted): {req}")
         req = caesar_cipher(req, KEY)
@@ -395,11 +388,12 @@ class Lobby(ctk.CTk):
             new_button = ctk.CTkButton(self.scrollable_frame1, text=f"{button}", fg_color="#4a4747",
                                        hover_color="#595454")
             new_button.grid(row=i, column=0, padx=10, pady=(0, 20))
+
+    def get_other_groups(self, username):
         server_available = reachable_server()
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.connect((server_available[0], server_available[1]))
-
-    def get_other_groups(self, username):
+        print(f"[+] Connected to server on {server_available[0]}:{server_available[1]}")
         req = f"get_other_groups {username}"
         print(f"[+] Client request (decrypted): {req}")
         req = caesar_cipher(req, KEY)
@@ -417,9 +411,6 @@ class Lobby(ctk.CTk):
             new_button = ctk.CTkButton(self.scrollable_frame2, text=f"{button}", fg_color="#4a4747",
                                        hover_color="#595454")
             new_button.grid(row=i, column=0, padx=10, pady=(0, 20))
-        server_available = reachable_server()
-        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.s.connect((server_available[0], server_available[1]))
 
     def open_toplevel_group(self):
         if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
