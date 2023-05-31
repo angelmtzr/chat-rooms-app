@@ -111,6 +111,11 @@ int process_request(char *req, char *res) {
       return -1;
     }
   }
+  else if (strcmp(service, "get_other_groups") == 0) {
+    if (get_other_groups(req, res) == -1) {
+      return -1;
+    }
+  }
   else {
     sprintf(error, "Requested an invalid service");
     sprintf(res, "ERROR %s", error);

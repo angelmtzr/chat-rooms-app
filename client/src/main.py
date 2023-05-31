@@ -311,6 +311,7 @@ class Lobby(ctk.CTk):
         self.grid_rowconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), weight=1)
         self.grid_columnconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), weight=1)
         self.scrollable_frame1_buttons = []
+        self.scrollable_frame2_buttons = []
 
         user_greeting = f"Hello {username}, welcome to PimenTalk!"
         self.greeting = ctk.CTkLabel(self, text=user_greeting, font=("Montserrat", 18, "bold")).grid(row=0,
@@ -336,7 +337,7 @@ class Lobby(ctk.CTk):
         self.scrollable_frame1.grid(row=0, column=0, rowspan=3)
         self.scrollable_frame1.grid_columnconfigure(0, weight=1)
 
-        self.scrollable_frame2 = ctk.CTkScrollableFrame(self.frame, label_text="All Groups",
+        self.scrollable_frame2 = ctk.CTkScrollableFrame(self.frame, label_text="Other Groups",
                                                         label_font=("Montserrat", 16, "bold"), height=425, width=200)
 
         self.scrollable_frame2.grid(row=0, column=1, rowspan=3)
@@ -346,6 +347,7 @@ class Lobby(ctk.CTk):
         self.scrollable_frame3.grid(row=0, column=2, rowspan=3)
         self.scrollable_frame3.grid_columnconfigure(0, weight=1)
         self.get_groups(username)
+        self.get_other_groups(username)
 
     def create_group(self, username, group_name):
         req = f"new_group {group_name} {username}"
@@ -391,6 +393,28 @@ class Lobby(ctk.CTk):
                 self.scrollable_frame1_buttons.append(group.split(" ")[0])
         for i, button in enumerate(self.scrollable_frame1_buttons):
             new_button = ctk.CTkButton(self.scrollable_frame1, text=f"{button}", fg_color="#4a4747",
+                                       hover_color="#595454")
+            new_button.grid(row=i, column=0, padx=10, pady=(0, 20))
+        server_available = reachable_server()
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s.connect((server_available[0], server_available[1]))
+
+    def get_other_groups(self, username):
+        req = f"get_other_groups {username}"
+        print(f"[+] Client request (decrypted): {req}")
+        req = caesar_cipher(req, KEY)
+        self.s.send(req.encode())
+        print(f"[+] Request sent to server (encrypted): {req}")
+        res = self.s.recv(1024).decode()
+        print(f"[+] Response from server (encrypted): {res}")
+        res = caesar_decipher(res, KEY)
+        print(f"[+] Server response (decrypted): {res}")
+        user_groups = res.split(":")
+        for group in user_groups:
+            if group:
+                self.scrollable_frame2_buttons.append(group.split(" ")[0])
+        for i, button in enumerate(self.scrollable_frame2_buttons):
+            new_button = ctk.CTkButton(self.scrollable_frame2, text=f"{button}", fg_color="#4a4747",
                                        hover_color="#595454")
             new_button.grid(row=i, column=0, padx=10, pady=(0, 20))
         server_available = reachable_server()

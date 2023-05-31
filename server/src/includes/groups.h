@@ -44,12 +44,13 @@ int get_user_groups(char *req, char *res){
         fclose(groupsFile);
         return -1;
     }
-    printf("%s\n", req);
+
     char line[BUFFER_SIZE];
     char current_line[BUFFER_SIZE];
     char response_cat[BUFFER_SIZE];
     char delim[] = " ";
     strcpy(response_cat, "");
+
     while (fgets(line, sizeof line, groupsFile) != NULL){
         line[strcspn(line, "\r\n")] = 0;
         strcpy(current_line, line);
@@ -66,9 +67,53 @@ int get_user_groups(char *req, char *res){
             }
             ptr = strtok(NULL, delim);
         }
-    sprintf(res, "%s", response_cat);
     }
+    sprintf(res, "%s", response_cat);
     return EXIT_SUCCESS;
 }
 
+int get_other_groups(char *req, char *res){
+    char username[BUFFER_SIZE];
+    strcpy(username, req);
+    char *filename = "groups.txt";
+    FILE *groupsFile = fopen(filename, "r");
+    if (groupsFile == NULL) {
+        sprintf(error, "Could not open group file");
+        sprintf(res, "ERROR %s", error);
+        fclose(groupsFile);
+        return -1;
+    }
+    
+    char line[BUFFER_SIZE];
+    char current_line[BUFFER_SIZE];
+    char response_cat[BUFFER_SIZE];
+    char delim[] = " ";
+    int flag_user;
+    strcpy(response_cat, "");
+
+    while (fgets(line, sizeof line, groupsFile) != NULL){
+        line[strcspn(line, "\r\n")] = 0;
+        strcpy(current_line, line);
+        
+
+        char *ptr = strtok(line, delim);
+        while(ptr != NULL)
+        {
+            printf("%s %s\n", ptr, username);
+            if(strcmp(ptr, username) == 0){
+                flag_user = 1;
+                break;
+            }
+            ptr = strtok(NULL, delim);
+        }
+        if(flag_user == 0){
+            strcat(response_cat, current_line);
+            strcat(response_cat, ":");
+        }
+        flag_user = 0;
+    }
+
+    sprintf(res, "%s", response_cat);
+    return EXIT_SUCCESS;
+}
 #endif //CHAT_ROOMS_SERVER_SERVICES_GROUPS_H
