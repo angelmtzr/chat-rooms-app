@@ -18,6 +18,7 @@ char *caesar_cipher(const char *text, int shift) {
       encrypted_text[i] = c;
     }
   }
+  encrypted_text[strlen(text)] = '\0';
   return encrypted_text;
 }
 
@@ -34,6 +35,7 @@ char *caesar_decipher(const char *encrypted_text, int shift) {
       decrypted_text[i] = c;
     }
   }
+  decrypted_text[strlen(encrypted_text)] = '\0';
   return decrypted_text;
 }
 

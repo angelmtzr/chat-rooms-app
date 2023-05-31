@@ -16,7 +16,7 @@
 #include "new_group.h"
 
 #define BUFFER_SIZE 1024
-#define CIPHER_KEY 14
+#define CIPHER_KEY 13
 #define TOKEN_SIZE 30
 
 /**
@@ -42,7 +42,7 @@ Socket server_setup(Port port) {
   if (bind(server, (Address *) &server_address, sizeof(server_address)) == -1) {
     perror("[-] Error binding socket");
     close(server);
-    printf("[-] Server shut down.");
+    printf("[-] Server shut down.\n");
     printf("----------------------------------------------------\n");
     exit(EXIT_FAILURE);
   }
@@ -50,7 +50,7 @@ Socket server_setup(Port port) {
   if (listen(server, SOMAXCONN) == -1) {
     perror("[-] Error in socket listen");
     close(server);
-    printf("[-] Server shut down.");
+    printf("[-] Server shut down.\n");
     printf("----------------------------------------------------\n");
     exit(EXIT_FAILURE);
   }
@@ -85,6 +85,7 @@ Socket server_accept(Socket server) {
 
 int process_request(char *req, char *res) {
   char *service = strsep(&req, " ");
+  //
   printf("[+] Service requested: %s\n", service);
 
   if (strcmp(service, "auth") == 0) {

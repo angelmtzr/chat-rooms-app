@@ -5,7 +5,7 @@ from PIL import Image
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("dark-blue")
 
-KEY = 14
+KEY = 13
 
 current_user = ""
 
@@ -299,6 +299,7 @@ class Lobby(ctk.CTk):
         self.s = s
         self.grid_rowconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), weight=1)
         self.grid_columnconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), weight=1)
+        self.scrollable_frame1_buttons = []
 
         user_greeting = f"Hello {username}, welcome to PimenTalk!"
         self.greeting = ctk.CTkLabel(self, text=user_greeting, font=("Montserrat", 18, "bold")).grid(row=0,
@@ -320,15 +321,17 @@ class Lobby(ctk.CTk):
         self.frame.grid_rowconfigure((0, 1, 2), weight=1)
 
         self.scrollable_frame1 = ctk.CTkScrollableFrame(self.frame, label_text="My Groups",
-                                                        label_font=("Montserrat", 16, "bold"), height=425, width=170)
+                                                        label_font=("Montserrat", 16, "bold"), height=425, width=200)
         self.scrollable_frame1.grid(row=0, column=0, rowspan=3)
         self.scrollable_frame1.grid_columnconfigure(0, weight=1)
+
         self.scrollable_frame2 = ctk.CTkScrollableFrame(self.frame, label_text="All Groups",
-                                                        label_font=("Montserrat", 16, "bold"), height=425, width=170)
+                                                        label_font=("Montserrat", 16, "bold"), height=425, width=200)
+
         self.scrollable_frame2.grid(row=0, column=1, rowspan=3)
         self.scrollable_frame2.grid_columnconfigure(0, weight=1)
         self.scrollable_frame3 = ctk.CTkScrollableFrame(self.frame, label_text="Requests",
-                                                        label_font=("Montserrat", 16, "bold"), height=425, width=170)
+                                                        label_font=("Montserrat", 16, "bold"), height=425, width=200)
         self.scrollable_frame3.grid(row=0, column=2, rowspan=3)
         self.scrollable_frame3.grid_columnconfigure(0, weight=1)
 
@@ -336,7 +339,7 @@ class Lobby(ctk.CTk):
         server_available = reachable_server()
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.connect((server_available[0], server_available[1]))
-        req = f"new_group {username} {group_name}"
+        req = f"new_group {group_name} {username}"
         print(f"[+] Client request (decrypted): {req}")
         req = caesar_cipher(req, KEY)
         self.s.send(req.encode())
@@ -348,6 +351,11 @@ class Lobby(ctk.CTk):
         auth_code = res.split(" ")[0]
         if auth_code == "SUCCESS":
             self.open_toplevel_success()
+            self.scrollable_frame1_buttons.append((username, group_name))
+            for i, button in enumerate(self.scrollable_frame1_buttons):
+                new_button = ctk.CTkButton(self.scrollable_frame1, text=button[1], fg_color="#4a4747",
+                                           hover_color="#595454")
+                new_button.grid(row=i, column=0, padx=10, pady=(0, 20))
         elif auth_code == "ERROR":
             server_available = reachable_server()
             self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

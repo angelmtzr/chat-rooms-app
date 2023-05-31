@@ -35,7 +35,7 @@ int read_database(char *req, char *res){
     return -1;
   }
 
-  char *filename = "auth.txt";
+  char *filename = "users.txt";
   FILE *auth_file = fopen(filename, "r");
   if (auth_file == NULL) {
     sprintf(error, "Could not open file");
@@ -78,7 +78,7 @@ int write_database(char *req, char *res){
     return -1;
   }
 
-  char *filename = "auth.txt";
+  char *filename = "users.txt";
   FILE *auth_file = fopen(filename, "a");
   if (auth_file == NULL) {
     sprintf(error, "Could not open file");
