@@ -8,6 +8,7 @@ ctk.set_default_color_theme("dark-blue")
 KEY = 13
 
 current_user = ""
+flag_login = False
 
 
 def server_connection(host: str, port: int) -> bool:
@@ -37,14 +38,18 @@ def reachable_server():
 
 class ChatRoomsApp(ctk.CTk):
 
-    def __init__(self, s):
+    def __init__(self):
         ctk.CTk.__init__(self)
+
+        server_available = reachable_server()
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s.connect((server_available[0], server_available[1]))
+        print(f"[+] Connected to server on {server_available[0]}:{server_available[1]}")
 
         self.geometry("650x600")
         self.title("PimenTalk - Login")
         self.iconbitmap("bitmap.ico")
         self.toplevel_window = None
-        self.s = s
 
         container = ctk.CTkFrame(self)
         container.pack(fill="both", expand=True)
@@ -96,6 +101,8 @@ class ChatRoomsApp(ctk.CTk):
         print(f"[+] Server response (decrypted): {res}")
         auth_code = res.split(" ")[0]
         if auth_code == "SUCCESS":
+            global flag_login
+            flag_login = True
             global current_user
             current_user = f"{username}"
             self.destroy()
@@ -289,14 +296,18 @@ class ToplevelWindowSuccess(ctk.CTkToplevel):
 
 
 class Lobby(ctk.CTk):
-    def __init__(self, s, username):
+    def __init__(self, username):
         ctk.CTk.__init__(self)
+
+        server_available = reachable_server()
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s.connect((server_available[0], server_available[1]))
+        print(f"[+] Connected to server on {server_available[0]}:{server_available[1]}")
 
         self.geometry("750x600")
         self.title("PimenTalk - Lobby")
         self.iconbitmap("bitmap.ico")
         self.toplevel_window = None
-        self.s = s
         self.grid_rowconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), weight=1)
         self.grid_columnconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), weight=1)
         self.scrollable_frame1_buttons = []
@@ -336,9 +347,6 @@ class Lobby(ctk.CTk):
         self.scrollable_frame3.grid_columnconfigure(0, weight=1)
 
     def create_group(self, username, group_name):
-        server_available = reachable_server()
-        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.s.connect((server_available[0], server_available[1]))
         req = f"new_group {group_name} {username}"
         print(f"[+] Client request (decrypted): {req}")
         req = caesar_cipher(req, KEY)
@@ -350,6 +358,9 @@ class Lobby(ctk.CTk):
         print(f"[+] Server response (decrypted): {res}")
         auth_code = res.split(" ")[0]
         if auth_code == "SUCCESS":
+            server_available = reachable_server()
+            self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.s.connect((server_available[0], server_available[1]))
             self.open_toplevel_success()
             self.scrollable_frame1_buttons.append((username, group_name))
             for i, button in enumerate(self.scrollable_frame1_buttons):
@@ -424,13 +435,10 @@ def caesar_decipher(ciphertext, shift):
 
 
 def main():
-    server_available = reachable_server()
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((server_available[0], server_available[1]))
-        print(f"[+] Connected to server on {server_available[0]}:{server_available[1]}")
-        CRA = ChatRoomsApp(s)
-        CRA.mainloop()
-        CRL = Lobby(s, current_user)
+    CRA = ChatRoomsApp()
+    CRA.mainloop()
+    if flag_login:
+        CRL = Lobby(current_user)
         CRL.mainloop()
 
 
