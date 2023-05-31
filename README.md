@@ -37,6 +37,25 @@ Then, navigate to the project directory:
 cd chat-rooms-app
 ```
 
+## Example Program
+
+### Login
+
+<p align="center">
+  <picture>
+    <img src="./images/lobby.jpeg">
+  </picture>
+</p>
+
+### Lobby
+
+<p align="center">
+  <picture>
+    <img src="./images/login.jpeg">
+  </picture>
+</p>
+
+
 ## Contributing
 
 Contributions are welcome! If you find a bug or have a feature request, please open an issue on the GitHub repository.
