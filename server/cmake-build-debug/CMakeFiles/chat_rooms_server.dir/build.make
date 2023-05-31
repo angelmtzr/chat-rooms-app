@@ -44,10 +44,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = "/Users/angel/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/231.8770.66/CLion.app/Contents/bin/cmake/mac/bin/cmake"
+CMAKE_COMMAND = "/Users/angel/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/CLion.app/Contents/bin/cmake/mac/bin/cmake"
 
 # The command to remove a file.
-RM = "/Users/angel/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/231.8770.66/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E rm -f
+RM = "/Users/angel/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -69,38 +69,10 @@ include CMakeFiles/chat_rooms_server.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/chat_rooms_server.dir/flags.make
 
-CMakeFiles/chat_rooms_server.dir/src/main.c.o: CMakeFiles/chat_rooms_server.dir/flags.make
-CMakeFiles/chat_rooms_server.dir/src/main.c.o: /Users/angel/Downloads/chat-rooms-app/server/src/main.c
-CMakeFiles/chat_rooms_server.dir/src/main.c.o: CMakeFiles/chat_rooms_server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/angel/Downloads/chat-rooms-app/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/chat_rooms_server.dir/src/main.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/chat_rooms_server.dir/src/main.c.o -MF CMakeFiles/chat_rooms_server.dir/src/main.c.o.d -o CMakeFiles/chat_rooms_server.dir/src/main.c.o -c /Users/angel/Downloads/chat-rooms-app/server/src/main.c
-
-CMakeFiles/chat_rooms_server.dir/src/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chat_rooms_server.dir/src/main.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/angel/Downloads/chat-rooms-app/server/src/main.c > CMakeFiles/chat_rooms_server.dir/src/main.c.i
-
-CMakeFiles/chat_rooms_server.dir/src/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chat_rooms_server.dir/src/main.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/angel/Downloads/chat-rooms-app/server/src/main.c -o CMakeFiles/chat_rooms_server.dir/src/main.c.s
-
-CMakeFiles/chat_rooms_server.dir/src/networking.c.o: CMakeFiles/chat_rooms_server.dir/flags.make
-CMakeFiles/chat_rooms_server.dir/src/networking.c.o: /Users/angel/Downloads/chat-rooms-app/server/src/networking.c
-CMakeFiles/chat_rooms_server.dir/src/networking.c.o: CMakeFiles/chat_rooms_server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/angel/Downloads/chat-rooms-app/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/chat_rooms_server.dir/src/networking.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/chat_rooms_server.dir/src/networking.c.o -MF CMakeFiles/chat_rooms_server.dir/src/networking.c.o.d -o CMakeFiles/chat_rooms_server.dir/src/networking.c.o -c /Users/angel/Downloads/chat-rooms-app/server/src/networking.c
-
-CMakeFiles/chat_rooms_server.dir/src/networking.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chat_rooms_server.dir/src/networking.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/angel/Downloads/chat-rooms-app/server/src/networking.c > CMakeFiles/chat_rooms_server.dir/src/networking.c.i
-
-CMakeFiles/chat_rooms_server.dir/src/networking.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chat_rooms_server.dir/src/networking.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/angel/Downloads/chat-rooms-app/server/src/networking.c -o CMakeFiles/chat_rooms_server.dir/src/networking.c.s
-
 CMakeFiles/chat_rooms_server.dir/src/services/auth.c.o: CMakeFiles/chat_rooms_server.dir/flags.make
 CMakeFiles/chat_rooms_server.dir/src/services/auth.c.o: /Users/angel/Downloads/chat-rooms-app/server/src/services/auth.c
 CMakeFiles/chat_rooms_server.dir/src/services/auth.c.o: CMakeFiles/chat_rooms_server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/angel/Downloads/chat-rooms-app/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/chat_rooms_server.dir/src/services/auth.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/angel/Downloads/chat-rooms-app/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/chat_rooms_server.dir/src/services/auth.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/chat_rooms_server.dir/src/services/auth.c.o -MF CMakeFiles/chat_rooms_server.dir/src/services/auth.c.o.d -o CMakeFiles/chat_rooms_server.dir/src/services/auth.c.o -c /Users/angel/Downloads/chat-rooms-app/server/src/services/auth.c
 
 CMakeFiles/chat_rooms_server.dir/src/services/auth.c.i: cmake_force
@@ -111,24 +83,24 @@ CMakeFiles/chat_rooms_server.dir/src/services/auth.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chat_rooms_server.dir/src/services/auth.c.s"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/angel/Downloads/chat-rooms-app/server/src/services/auth.c -o CMakeFiles/chat_rooms_server.dir/src/services/auth.c.s
 
-CMakeFiles/chat_rooms_server.dir/src/encrypt.c.o: CMakeFiles/chat_rooms_server.dir/flags.make
-CMakeFiles/chat_rooms_server.dir/src/encrypt.c.o: /Users/angel/Downloads/chat-rooms-app/server/src/encrypt.c
-CMakeFiles/chat_rooms_server.dir/src/encrypt.c.o: CMakeFiles/chat_rooms_server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/angel/Downloads/chat-rooms-app/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/chat_rooms_server.dir/src/encrypt.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/chat_rooms_server.dir/src/encrypt.c.o -MF CMakeFiles/chat_rooms_server.dir/src/encrypt.c.o.d -o CMakeFiles/chat_rooms_server.dir/src/encrypt.c.o -c /Users/angel/Downloads/chat-rooms-app/server/src/encrypt.c
+CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.o: CMakeFiles/chat_rooms_server.dir/flags.make
+CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.o: /Users/angel/Downloads/chat-rooms-app/server/src/networking/encrypt.c
+CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.o: CMakeFiles/chat_rooms_server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/angel/Downloads/chat-rooms-app/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.o -MF CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.o.d -o CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.o -c /Users/angel/Downloads/chat-rooms-app/server/src/networking/encrypt.c
 
-CMakeFiles/chat_rooms_server.dir/src/encrypt.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chat_rooms_server.dir/src/encrypt.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/angel/Downloads/chat-rooms-app/server/src/encrypt.c > CMakeFiles/chat_rooms_server.dir/src/encrypt.c.i
+CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/angel/Downloads/chat-rooms-app/server/src/networking/encrypt.c > CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.i
 
-CMakeFiles/chat_rooms_server.dir/src/encrypt.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chat_rooms_server.dir/src/encrypt.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/angel/Downloads/chat-rooms-app/server/src/encrypt.c -o CMakeFiles/chat_rooms_server.dir/src/encrypt.c.s
+CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/angel/Downloads/chat-rooms-app/server/src/networking/encrypt.c -o CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.s
 
 CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.o: CMakeFiles/chat_rooms_server.dir/flags.make
 CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.o: /Users/angel/Downloads/chat-rooms-app/server/src/services/new_group.c
 CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.o: CMakeFiles/chat_rooms_server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/angel/Downloads/chat-rooms-app/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/angel/Downloads/chat-rooms-app/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.o -MF CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.o.d -o CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.o -c /Users/angel/Downloads/chat-rooms-app/server/src/services/new_group.c
 
 CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.i: cmake_force
@@ -139,25 +111,69 @@ CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.s"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/angel/Downloads/chat-rooms-app/server/src/services/new_group.c -o CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.s
 
+CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.o: CMakeFiles/chat_rooms_server.dir/flags.make
+CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.o: /Users/angel/Downloads/chat-rooms-app/server/src/chat_rooms_app_server.c
+CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.o: CMakeFiles/chat_rooms_server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/angel/Downloads/chat-rooms-app/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.o -MF CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.o.d -o CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.o -c /Users/angel/Downloads/chat-rooms-app/server/src/chat_rooms_app_server.c
+
+CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/angel/Downloads/chat-rooms-app/server/src/chat_rooms_app_server.c > CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.i
+
+CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/angel/Downloads/chat-rooms-app/server/src/chat_rooms_app_server.c -o CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.s
+
+CMakeFiles/chat_rooms_server.dir/src/networking/server.c.o: CMakeFiles/chat_rooms_server.dir/flags.make
+CMakeFiles/chat_rooms_server.dir/src/networking/server.c.o: /Users/angel/Downloads/chat-rooms-app/server/src/networking/server.c
+CMakeFiles/chat_rooms_server.dir/src/networking/server.c.o: CMakeFiles/chat_rooms_server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/angel/Downloads/chat-rooms-app/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/chat_rooms_server.dir/src/networking/server.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/chat_rooms_server.dir/src/networking/server.c.o -MF CMakeFiles/chat_rooms_server.dir/src/networking/server.c.o.d -o CMakeFiles/chat_rooms_server.dir/src/networking/server.c.o -c /Users/angel/Downloads/chat-rooms-app/server/src/networking/server.c
+
+CMakeFiles/chat_rooms_server.dir/src/networking/server.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chat_rooms_server.dir/src/networking/server.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/angel/Downloads/chat-rooms-app/server/src/networking/server.c > CMakeFiles/chat_rooms_server.dir/src/networking/server.c.i
+
+CMakeFiles/chat_rooms_server.dir/src/networking/server.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chat_rooms_server.dir/src/networking/server.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/angel/Downloads/chat-rooms-app/server/src/networking/server.c -o CMakeFiles/chat_rooms_server.dir/src/networking/server.c.s
+
+CMakeFiles/chat_rooms_server.dir/src/networking/process.c.o: CMakeFiles/chat_rooms_server.dir/flags.make
+CMakeFiles/chat_rooms_server.dir/src/networking/process.c.o: /Users/angel/Downloads/chat-rooms-app/server/src/networking/process.c
+CMakeFiles/chat_rooms_server.dir/src/networking/process.c.o: CMakeFiles/chat_rooms_server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/angel/Downloads/chat-rooms-app/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/chat_rooms_server.dir/src/networking/process.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/chat_rooms_server.dir/src/networking/process.c.o -MF CMakeFiles/chat_rooms_server.dir/src/networking/process.c.o.d -o CMakeFiles/chat_rooms_server.dir/src/networking/process.c.o -c /Users/angel/Downloads/chat-rooms-app/server/src/networking/process.c
+
+CMakeFiles/chat_rooms_server.dir/src/networking/process.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/chat_rooms_server.dir/src/networking/process.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/angel/Downloads/chat-rooms-app/server/src/networking/process.c > CMakeFiles/chat_rooms_server.dir/src/networking/process.c.i
+
+CMakeFiles/chat_rooms_server.dir/src/networking/process.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/chat_rooms_server.dir/src/networking/process.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/angel/Downloads/chat-rooms-app/server/src/networking/process.c -o CMakeFiles/chat_rooms_server.dir/src/networking/process.c.s
+
 # Object files for target chat_rooms_server
 chat_rooms_server_OBJECTS = \
-"CMakeFiles/chat_rooms_server.dir/src/main.c.o" \
-"CMakeFiles/chat_rooms_server.dir/src/networking.c.o" \
 "CMakeFiles/chat_rooms_server.dir/src/services/auth.c.o" \
-"CMakeFiles/chat_rooms_server.dir/src/encrypt.c.o" \
-"CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.o"
+"CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.o" \
+"CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.o" \
+"CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.o" \
+"CMakeFiles/chat_rooms_server.dir/src/networking/server.c.o" \
+"CMakeFiles/chat_rooms_server.dir/src/networking/process.c.o"
 
 # External object files for target chat_rooms_server
 chat_rooms_server_EXTERNAL_OBJECTS =
 
-chat_rooms_server: CMakeFiles/chat_rooms_server.dir/src/main.c.o
-chat_rooms_server: CMakeFiles/chat_rooms_server.dir/src/networking.c.o
 chat_rooms_server: CMakeFiles/chat_rooms_server.dir/src/services/auth.c.o
-chat_rooms_server: CMakeFiles/chat_rooms_server.dir/src/encrypt.c.o
+chat_rooms_server: CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.o
 chat_rooms_server: CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.o
+chat_rooms_server: CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.o
+chat_rooms_server: CMakeFiles/chat_rooms_server.dir/src/networking/server.c.o
+chat_rooms_server: CMakeFiles/chat_rooms_server.dir/src/networking/process.c.o
 chat_rooms_server: CMakeFiles/chat_rooms_server.dir/build.make
 chat_rooms_server: CMakeFiles/chat_rooms_server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/angel/Downloads/chat-rooms-app/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable chat_rooms_server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/angel/Downloads/chat-rooms-app/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable chat_rooms_server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/chat_rooms_server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

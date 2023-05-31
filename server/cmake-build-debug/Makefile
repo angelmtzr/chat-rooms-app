@@ -48,10 +48,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = "/Users/angel/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/231.8770.66/CLion.app/Contents/bin/cmake/mac/bin/cmake"
+CMAKE_COMMAND = "/Users/angel/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/CLion.app/Contents/bin/cmake/mac/bin/cmake"
 
 # The command to remove a file.
-RM = "/Users/angel/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/231.8770.66/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E rm -f
+RM = "/Users/angel/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /Users/angel/Downloads/chat-rooms-app/server/cmake-build-debu
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	"/Users/angel/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/231.8770.66/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E echo No\ interactive\ CMake\ dialog\ available.
+	"/Users/angel/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -78,7 +78,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	"/Users/angel/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/231.8770.66/CLion.app/Contents/bin/cmake/mac/bin/cmake" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	"/Users/angel/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/CLion.app/Contents/bin/cmake/mac/bin/cmake" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -129,77 +129,101 @@ chat_rooms_server/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/build
 .PHONY : chat_rooms_server/fast
 
-src/encrypt.o: src/encrypt.c.o
-.PHONY : src/encrypt.o
+src/chat_rooms_app_server.o: src/chat_rooms_app_server.c.o
+.PHONY : src/chat_rooms_app_server.o
 
 # target to build an object file
-src/encrypt.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/encrypt.c.o
-.PHONY : src/encrypt.c.o
+src/chat_rooms_app_server.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.o
+.PHONY : src/chat_rooms_app_server.c.o
 
-src/encrypt.i: src/encrypt.c.i
-.PHONY : src/encrypt.i
+src/chat_rooms_app_server.i: src/chat_rooms_app_server.c.i
+.PHONY : src/chat_rooms_app_server.i
 
 # target to preprocess a source file
-src/encrypt.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/encrypt.c.i
-.PHONY : src/encrypt.c.i
+src/chat_rooms_app_server.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.i
+.PHONY : src/chat_rooms_app_server.c.i
 
-src/encrypt.s: src/encrypt.c.s
-.PHONY : src/encrypt.s
+src/chat_rooms_app_server.s: src/chat_rooms_app_server.c.s
+.PHONY : src/chat_rooms_app_server.s
 
 # target to generate assembly for a file
-src/encrypt.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/encrypt.c.s
-.PHONY : src/encrypt.c.s
+src/chat_rooms_app_server.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.s
+.PHONY : src/chat_rooms_app_server.c.s
 
-src/main.o: src/main.c.o
-.PHONY : src/main.o
+src/networking/encrypt.o: src/networking/encrypt.c.o
+.PHONY : src/networking/encrypt.o
 
 # target to build an object file
-src/main.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/main.c.o
-.PHONY : src/main.c.o
+src/networking/encrypt.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.o
+.PHONY : src/networking/encrypt.c.o
 
-src/main.i: src/main.c.i
-.PHONY : src/main.i
+src/networking/encrypt.i: src/networking/encrypt.c.i
+.PHONY : src/networking/encrypt.i
 
 # target to preprocess a source file
-src/main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/main.c.i
-.PHONY : src/main.c.i
+src/networking/encrypt.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.i
+.PHONY : src/networking/encrypt.c.i
 
-src/main.s: src/main.c.s
-.PHONY : src/main.s
+src/networking/encrypt.s: src/networking/encrypt.c.s
+.PHONY : src/networking/encrypt.s
 
 # target to generate assembly for a file
-src/main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/main.c.s
-.PHONY : src/main.c.s
+src/networking/encrypt.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.s
+.PHONY : src/networking/encrypt.c.s
 
-src/networking.o: src/networking.c.o
-.PHONY : src/networking.o
+src/networking/process.o: src/networking/process.c.o
+.PHONY : src/networking/process.o
 
 # target to build an object file
-src/networking.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/networking.c.o
-.PHONY : src/networking.c.o
+src/networking/process.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/networking/process.c.o
+.PHONY : src/networking/process.c.o
 
-src/networking.i: src/networking.c.i
-.PHONY : src/networking.i
+src/networking/process.i: src/networking/process.c.i
+.PHONY : src/networking/process.i
 
 # target to preprocess a source file
-src/networking.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/networking.c.i
-.PHONY : src/networking.c.i
+src/networking/process.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/networking/process.c.i
+.PHONY : src/networking/process.c.i
 
-src/networking.s: src/networking.c.s
-.PHONY : src/networking.s
+src/networking/process.s: src/networking/process.c.s
+.PHONY : src/networking/process.s
 
 # target to generate assembly for a file
-src/networking.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/networking.c.s
-.PHONY : src/networking.c.s
+src/networking/process.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/networking/process.c.s
+.PHONY : src/networking/process.c.s
+
+src/networking/server.o: src/networking/server.c.o
+.PHONY : src/networking/server.o
+
+# target to build an object file
+src/networking/server.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/networking/server.c.o
+.PHONY : src/networking/server.c.o
+
+src/networking/server.i: src/networking/server.c.i
+.PHONY : src/networking/server.i
+
+# target to preprocess a source file
+src/networking/server.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/networking/server.c.i
+.PHONY : src/networking/server.c.i
+
+src/networking/server.s: src/networking/server.c.s
+.PHONY : src/networking/server.s
+
+# target to generate assembly for a file
+src/networking/server.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chat_rooms_server.dir/build.make CMakeFiles/chat_rooms_server.dir/src/networking/server.c.s
+.PHONY : src/networking/server.c.s
 
 src/services/auth.o: src/services/auth.c.o
 .PHONY : src/services/auth.o
@@ -258,15 +282,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... chat_rooms_server"
-	@echo "... src/encrypt.o"
-	@echo "... src/encrypt.i"
-	@echo "... src/encrypt.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
-	@echo "... src/networking.o"
-	@echo "... src/networking.i"
-	@echo "... src/networking.s"
+	@echo "... src/chat_rooms_app_server.o"
+	@echo "... src/chat_rooms_app_server.i"
+	@echo "... src/chat_rooms_app_server.s"
+	@echo "... src/networking/encrypt.o"
+	@echo "... src/networking/encrypt.i"
+	@echo "... src/networking/encrypt.s"
+	@echo "... src/networking/process.o"
+	@echo "... src/networking/process.i"
+	@echo "... src/networking/process.s"
+	@echo "... src/networking/server.o"
+	@echo "... src/networking/server.i"
+	@echo "... src/networking/server.s"
 	@echo "... src/services/auth.o"
 	@echo "... src/services/auth.i"
 	@echo "... src/services/auth.s"

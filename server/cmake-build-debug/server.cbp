@@ -81,10 +81,16 @@
 		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/includes/commons.h">
 			<Option target="chat_rooms_server"/>
 		</Unit>
-		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/includes/encrypt.h">
+		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/includes/networking/encrypt.h">
 			<Option target="chat_rooms_server"/>
 		</Unit>
-		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/includes/networking.h">
+		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/includes/networking/internet.h">
+			<Option target="chat_rooms_server"/>
+		</Unit>
+		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/includes/networking/process.h">
+			<Option target="chat_rooms_server"/>
+		</Unit>
+		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/includes/networking/server.h">
 			<Option target="chat_rooms_server"/>
 		</Unit>
 		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/includes/services/auth.h">
@@ -93,13 +99,16 @@
 		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/includes/services/new_group.h">
 			<Option target="chat_rooms_server"/>
 		</Unit>
-		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/src/encrypt.c">
+		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/src/chat_rooms_app_server.c">
 			<Option target="chat_rooms_server"/>
 		</Unit>
-		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/src/main.c">
+		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/src/networking/encrypt.c">
 			<Option target="chat_rooms_server"/>
 		</Unit>
-		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/src/networking.c">
+		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/src/networking/process.c">
+			<Option target="chat_rooms_server"/>
+		</Unit>
+		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/src/networking/server.c">
 			<Option target="chat_rooms_server"/>
 		</Unit>
 		<Unit filename="/Users/angel/Downloads/chat-rooms-app/server/src/services/auth.c">

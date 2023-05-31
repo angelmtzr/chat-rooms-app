@@ -8,9 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/angel/Downloads/chat-rooms-app/server/src/encrypt.c" "CMakeFiles/chat_rooms_server.dir/src/encrypt.c.o" "gcc" "CMakeFiles/chat_rooms_server.dir/src/encrypt.c.o.d"
-  "/Users/angel/Downloads/chat-rooms-app/server/src/main.c" "CMakeFiles/chat_rooms_server.dir/src/main.c.o" "gcc" "CMakeFiles/chat_rooms_server.dir/src/main.c.o.d"
-  "/Users/angel/Downloads/chat-rooms-app/server/src/networking.c" "CMakeFiles/chat_rooms_server.dir/src/networking.c.o" "gcc" "CMakeFiles/chat_rooms_server.dir/src/networking.c.o.d"
+  "/Users/angel/Downloads/chat-rooms-app/server/src/chat_rooms_app_server.c" "CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.o" "gcc" "CMakeFiles/chat_rooms_server.dir/src/chat_rooms_app_server.c.o.d"
+  "/Users/angel/Downloads/chat-rooms-app/server/src/networking/encrypt.c" "CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.o" "gcc" "CMakeFiles/chat_rooms_server.dir/src/networking/encrypt.c.o.d"
+  "/Users/angel/Downloads/chat-rooms-app/server/src/networking/process.c" "CMakeFiles/chat_rooms_server.dir/src/networking/process.c.o" "gcc" "CMakeFiles/chat_rooms_server.dir/src/networking/process.c.o.d"
+  "/Users/angel/Downloads/chat-rooms-app/server/src/networking/server.c" "CMakeFiles/chat_rooms_server.dir/src/networking/server.c.o" "gcc" "CMakeFiles/chat_rooms_server.dir/src/networking/server.c.o.d"
   "/Users/angel/Downloads/chat-rooms-app/server/src/services/auth.c" "CMakeFiles/chat_rooms_server.dir/src/services/auth.c.o" "gcc" "CMakeFiles/chat_rooms_server.dir/src/services/auth.c.o.d"
   "/Users/angel/Downloads/chat-rooms-app/server/src/services/new_group.c" "CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.o" "gcc" "CMakeFiles/chat_rooms_server.dir/src/services/new_group.c.o.d"
   )
