@@ -345,6 +345,7 @@ class Lobby(ctk.CTk):
                                                         label_font=("Montserrat", 16, "bold"), height=425, width=200)
         self.scrollable_frame3.grid(row=0, column=2, rowspan=3)
         self.scrollable_frame3.grid_columnconfigure(0, weight=1)
+        self.get_groups(username)
 
     def create_group(self, username, group_name):
         req = f"new_group {group_name} {username}"
@@ -362,16 +363,39 @@ class Lobby(ctk.CTk):
             self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.s.connect((server_available[0], server_available[1]))
             self.open_toplevel_success()
-            self.scrollable_frame1_buttons.append((username, group_name))
+            self.scrollable_frame1_buttons.append(group_name)
             for i, button in enumerate(self.scrollable_frame1_buttons):
-                new_button = ctk.CTkButton(self.scrollable_frame1, text=button[1], fg_color="#4a4747",
+                new_button = ctk.CTkButton(self.scrollable_frame1, text=f"{button}", fg_color="#4a4747",
                                            hover_color="#595454")
                 new_button.grid(row=i, column=0, padx=10, pady=(0, 20))
+
         elif auth_code == "ERROR":
             server_available = reachable_server()
             self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.s.connect((server_available[0], server_available[1]))
             self.open_toplevel_group()
+
+    def get_groups(self, username):
+        req = f"get_user_groups {username}"
+        print(f"[+] Client request (decrypted): {req}")
+        req = caesar_cipher(req, KEY)
+        self.s.send(req.encode())
+        print(f"[+] Request sent to server (encrypted): {req}")
+        res = self.s.recv(1024).decode()
+        print(f"[+] Response from server (encrypted): {res}")
+        res = caesar_decipher(res, KEY)
+        print(f"[+] Server response (decrypted): {res}")
+        user_groups = res.split(":")
+        for group in user_groups:
+            if group:
+                self.scrollable_frame1_buttons.append(group.split(" ")[0])
+        for i, button in enumerate(self.scrollable_frame1_buttons):
+            new_button = ctk.CTkButton(self.scrollable_frame1, text=f"{button}", fg_color="#4a4747",
+                                       hover_color="#595454")
+            new_button.grid(row=i, column=0, padx=10, pady=(0, 20))
+        server_available = reachable_server()
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s.connect((server_available[0], server_available[1]))
 
     def open_toplevel_group(self):
         if self.toplevel_window is None or not self.toplevel_window.winfo_exists():

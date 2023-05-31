@@ -1,11 +1,10 @@
+#ifndef AUTH_H
+#define AUTH_H
+
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-
-
-#ifndef AUTH_H
-#define AUTH_H
 
 #include "commons.h"
 #include "server.h"

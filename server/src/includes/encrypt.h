@@ -1,9 +1,9 @@
+#ifndef ENCRYPT_H
+#define ENCRYPT_H
+
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
-
-#ifndef ENCRYPT_H
-#define ENCRYPT_H
 
 char *caesar_cipher(const char *text, int shift) {
   char *encrypted_text = malloc(strlen(text) * sizeof(char));

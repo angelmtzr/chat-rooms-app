@@ -1,3 +1,6 @@
+#ifndef SERVER_H
+#define SERVER_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -5,15 +8,12 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
-#ifndef SERVER_H
-#define SERVER_H
-
 #include "internet.h"
 #include "auth.h"
 #include "encrypt.h"
 #include "commons.h"
 #include "process.h"
-#include "new_group.h"
+#include "groups.h"
 
 #define BUFFER_SIZE 1024
 #define CIPHER_KEY 13
@@ -103,6 +103,11 @@ int process_request(char *req, char *res) {
   }
   else if (strcmp(service, "new_group") == 0) {
     if (new_group_service(req, res) == -1) {
+      return -1;
+    }
+  }
+  else if (strcmp(service, "get_user_groups") == 0) {
+    if (get_user_groups(req, res) == -1) {
       return -1;
     }
   }
