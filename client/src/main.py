@@ -1,6 +1,7 @@
 import socket
 import customtkinter as ctk
 from PIL import Image
+from functools import partial
 
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("dark-blue")
@@ -290,6 +291,11 @@ class ToplevelWindowSuccess(ctk.CTkToplevel):
                       hover_color="#595550", command=self.destroy).grid(column=1, row=1)
 
 
+def open_toplevel_chat(group_name):
+    print(group_name)
+    ToplevelWindowChat(group_name).focus()  # create window if its None or destroyed
+
+
 class Lobby(ctk.CTk):
     def __init__(self, username):
         ctk.CTk.__init__(self)
@@ -309,15 +315,20 @@ class Lobby(ctk.CTk):
                                                                                                      column=0,
                                                                                                      columnspan=5,
                                                                                                      pady=15)
-        self.group_name_entry = ctk.CTkEntry(self, width=140, height=40, placeholder_text="Group name",
+        self.group_name_entry = ctk.CTkEntry(self, width=100, height=40, placeholder_text="Group name",
                                              placeholder_text_color=("Grey", "Grey"))
         self.group_name_entry.grid(row=0, column=6, pady=15)
-        self.create_group_button = ctk.CTkButton(self, width=140, height=40, text="Create Group",
+        self.create_group_button = ctk.CTkButton(self, width=120, height=40, text="Create Group",
                                                  font=("Montserrat", 15, "bold"), text_color="black",
                                                  fg_color="#fca521", hover_color="#e38c09",
                                                  command=lambda: self.create_group(username, self.group_name_entry.get()
                                                                                    ))
-        self.create_group_button.grid(row=0, column=7, columnspan=3, pady=15)
+        self.create_group_button.grid(row=0, column=7, columnspan=2)
+        self.refresh_button = ctk.CTkButton(self, width=70, height=40, text="Refresh",
+                                            font=("Montserrat", 15, "bold"), text_color="black",
+                                            fg_color="#fca521", hover_color="#e38c09",
+                                            command=lambda: self.refresh(username))
+        self.refresh_button.grid(row=0, column=9, pady=15)
         self.frame = ctk.CTkFrame(self, width=100, corner_radius=0)
         self.frame.grid(row=1, column=0, rowspan=10, columnspan=11, sticky="nsew")
         self.frame.grid_columnconfigure((0, 1, 2), weight=1)
@@ -357,11 +368,7 @@ class Lobby(ctk.CTk):
         auth_code = res.split(" ")[0]
         if auth_code == "SUCCESS":
             self.open_toplevel_success()
-            self.scrollable_frame1_buttons.append(group_name)
-            for i, button in enumerate(self.scrollable_frame1_buttons):
-                new_button = ctk.CTkButton(self.scrollable_frame1, text=f"{button}", fg_color="#4a4747",
-                                           hover_color="#595454")
-                new_button.grid(row=i, column=0, padx=10, pady=(0, 20))
+            self.refresh(username)
 
         elif auth_code == "ERROR":
             self.open_toplevel_group()
@@ -386,7 +393,7 @@ class Lobby(ctk.CTk):
                 self.scrollable_frame1_buttons.append(group.split(" ")[0])
         for i, button in enumerate(self.scrollable_frame1_buttons):
             new_button = ctk.CTkButton(self.scrollable_frame1, text=f"{button}", fg_color="#4a4747",
-                                       hover_color="#595454")
+                                       hover_color="#595454", command=partial(open_toplevel_chat, button))
             new_button.grid(row=i, column=0, padx=10, pady=(0, 20))
 
     def get_other_groups(self, username):
@@ -426,6 +433,13 @@ class Lobby(ctk.CTk):
         else:
             self.toplevel_window.focus()
 
+    def refresh(self, username):
+        self.scrollable_frame1_buttons = []
+        self.scrollable_frame2_buttons = []
+
+        self.get_groups(username)
+        self.get_other_groups(username)
+
 
 class ToplevelWindowGroup(ctk.CTkToplevel):
     def __init__(self):
@@ -447,6 +461,28 @@ class ToplevelWindowGroup(ctk.CTkToplevel):
                       font=("Montserrat", 18, "bold"), text_color="White",
                       fg_color="#4a4743",
                       hover_color="#595550", command=self.destroy).grid(column=1, row=1)
+
+
+class ToplevelWindowChat(ctk.CTkToplevel):
+    def __init__(self, group_name):
+        ctk.CTkToplevel.__init__(self)
+        chat_name = f"Chat - {group_name}"
+        self.geometry("321x500")
+        self.title(chat_name)
+        self.after(250, lambda: self.iconbitmap("bitmap.ico"))
+        self.grid_rowconfigure((0, 1, 2, 3, 4, 5, 6, 7, 8, 9), weight=1)
+        self.grid_columnconfigure((0, 1, 2), weight=1)
+
+        self.chat_frame = ctk.CTkFrame(self, width=100, corner_radius=0)
+        self.chat_frame.grid(row=0, column=0, rowspan=9, columnspan=3, sticky="nsew")
+        self.chat_entry = ctk.CTkEntry(self, width=200, height=35, placeholder_text="Write your message...",
+                                       placeholder_text_color=("Grey", "Grey"))
+        self.chat_entry.grid(row=9, column=0, columnspan=2)
+        self.send_button = ctk.CTkButton(self, width=70, height=35, text="Send",
+                                         font=("Montserrat", 15, "bold"), text_color="black",
+                                         fg_color="#fca521", hover_color="#e38c09",
+                                         )
+        self.send_button.grid(row=9, column=2, sticky="w")
 
 
 def caesar_cipher(plaintext, shift):

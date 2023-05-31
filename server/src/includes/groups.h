@@ -99,7 +99,6 @@ int get_other_groups(char *req, char *res){
         char *ptr = strtok(line, delim);
         while(ptr != NULL)
         {
-            printf("%s %s\n", ptr, username);
             if(strcmp(ptr, username) == 0){
                 flag_user = 1;
                 break;
